@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div>
+            <table class="adressTable">
+                <tr>
+                    <td class="small">{{from.name}}, {{from.street}}, {{from.postcode}} {{from.city}}</td>
+                </tr>
+                <tr><td>{{to.name}}</td></tr>
+                <tr><td>{{to.street}}</td></tr>
+                <tr><td>{{to.postcode}} {{to.city}}</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <table class="infoTable">
+                <tr>
+                    <td><b>Invoice Number {{invoice.number}}</b></td>
+                    <td>Customer Number : {{customer_number}}</td>
+                </tr>
+                <tr>
+                    <td class="small">Pasumai Indhiya.</td>
+                    <td>Invoice Date: {{invoice.date}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <table class="invoiceTable">
+                <thead>
+                    <tr>
+                        <td>S.no</td>
+                        <td>Descrioption</td>
+                        <td>Subscription Duration</td>
+                        <td>Amount</td>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#positions}}
+                    <tr>
+                        <td>{{pos_number}}</td>
+                        <td>{{{text}}}</td>
+                        <td>1 Year</td>
+                        <td>{{amount}}</td>
+                        
+                    </tr>
+                    {{/positions}}
+                    <tr class="tfoot">
+                        <td class="padrow"></td>
+                    </tr>
+                       
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section">
+ 
+            <p>Subscription End date {{invoice.pay_until_date}}.</p>
+        </div>
+
+    </body>
+</html>

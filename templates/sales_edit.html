@@ -1,0 +1,100 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+{% block stylesheet %}
+    <style>
+        .bd-example {
+            padding: 1.5rem;
+            margin-right: 0;
+            margin-left: 0;
+            border-width: 1px;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+        }
+        .bd-example {
+            position: relative;
+            padding: 1rem;
+            margin: 1rem -.75rem 0;
+            border: solid #dee2e6;
+            border-width: 1px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Sales</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Edit Sales</li>
+        </ol>
+        <div class="bd-example">
+            <form action="update/{{ sales.id }}" method="POST">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input class="form-control" id="inputName" type="text" value="{{ sales.name }}" name="name" placeholder="Enter your first name"/>
+                            <label for="inputname">Enter Name</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" id="inputStreet" type="text" value="{{ sales.add_street }}" name="street" placeholder="Enter your last name"/>
+                            <label for="inputstreet">Enter Street</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" id="inputlocation" type="text" value="{{ sales.add_location }}" name="location" placeholder="Enter your last name" readonly/>
+                            <label for="inputlocation">Enter location</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" id="inputdistrict" type="text" value="{{ sales.add_district }}" name="district" placeholder="Enter your last name" readonly/>
+                            <label for="inputdistrict">Enter district</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" id="inputstate" type="text" value="{{ sales.add_state }}" name="state" placeholder="Enter your last name" readonly/>
+                            <label for="inputstate">Enter state</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" id="inputpincode" type="text" value="{{ sales.add_pincode }}" name="pincode" placeholder="Enter your last name" readonly/>
+                            <label for="inputpincode">Enter pincode</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" id="inputphone" type="number" value="{{ sales.phone }}" name="phone" placeholder="Enter your last name" readonly/>
+                            <label for="inputphone" >Enter phone</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" id="inputstock" type="number" value="{{ sales.stock }}" name="stock" placeholder="Enter your last name"/>
+                            <label for="inputstock">Enter stock</label>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="mt-4 mb-0">
+                    <div class="d-grid"><button class="btn btn-primary btn-block" type="submit">Submit</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

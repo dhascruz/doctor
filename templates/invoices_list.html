@@ -1,0 +1,103 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+
+{% block body %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Invoices</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Invoices</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Invoices List
+                {% if request.user.is_superuser %}
+                    
+            
+                {% endif %} 
+
+
+            </div>
+
+            
+
+
+
+            <div class="card-body">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                       Invoices list
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Name</th>
+                                <th>count</th>
+                                <th>Street</th>
+                                <th>District</th>
+                                <th>Location</th>
+                                <th>Action</th>
+                                
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>id</th>
+                                <th>Name</th>
+                                <th>count</th>
+                                <th>Street</th>
+                                <th>District</th>
+                                <th>Location</th>
+                                <th>Action</th>
+                            </tfoot>
+                            <tbody>
+                                {% for invoices in invoices %}
+                        <tr>
+                            <td>{{ invoices.id }}</td>
+                            <td><a class="btn btn-sm " href="trans_list_byid/{{ invoices.id }}"> {{ invoices.name }}</a></td>
+                            <td>{{ invoices.count }}</td>
+                            
+                            <td>{{ invoices.add_street }}</td>
+
+                            <td>{{ invoices.add_district }}</td>
+                            <td>{{ invoices.add_state }}</td>
+                            
+                            
+                           <td>
+                            <a class="btn btn-sm btn-warning" href="invoice_edit/{{ invoices.id }}">  Edit</a>
+                                <a class="btn btn-sm btn-warning" href="inv_pdf/{{ invoices.id }}"> <span class="fa fa-edit"></span> PDF Create</a>
+                                
+                            </td> 
+                        </tr>
+                    {% endfor %}
+  
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+              
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'assets/demo/chart-bar-demo.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
+{% endblock %}

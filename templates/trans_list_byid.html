@@ -1,0 +1,197 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+
+{% block body %}
+<!-- <link href="{% static 'table/css/bootstrap.min.css' %}" rel="stylesheet">
+<script src="{% static 'table/js/jquery.min.js' %}"></script>
+<script src="{% static 'table/js/bootstrap.min.js' %}"></script> -->
+
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Task Completed</h1>
+        {% for sale_name in sale_name %}
+        <h2><b>{{ sale_name.name }}</b></h2>
+        {% endfor %}
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            
+        </ol>
+        <div class="card mb-4">
+            <!-- <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Transactions List
+                <a class="btn btn-sm btn-success" href="{% url 'trans_create' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+            </div> -->
+
+            
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-primary text-white mb-4">
+                        <div class="card-body">Review </div>
+                        <div style="font-size: 70px;text-align: center;">{{ rev_cnt }}</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            
+                            <a class="small text-white stretched-link" href="trans_list_bystatus/1">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-warning text-white mb-4">
+                        <div class="card-body">Subscription</div>
+                        <div style="font-size: 70px;text-align: center;">{{ sub_cnt }}</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="trans_list_bystatus/3">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">Sales</div>
+                        <div style="font-size: 70px;text-align: center;">{{ sal_cnt }}</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="trans_list_bystatus/2">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-danger text-white mb-4">
+                        <div class="card-body">Stock</div>
+                        <div style="font-size: 70px;text-align: center;">{{ sto_cnt }}</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="trans_list_bystatus/4">View Details</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                <div class="container" style="margin-top: 10px">
+                    
+                    <br />
+                    
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                       
+                    </div>
+                    <div class="card-body">
+                        
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Sales person name</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                
+                                <th>Street</th>
+                                <th>Distict</th>
+                                
+                                <th>State</th>
+                                <th>Action</th>
+                                
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>id</th>
+                                <th>Sales person name</th> 
+                                <th>Name</th>
+                                <th>Phone</th>
+                                
+                                <th>Street</th>
+                                <th>Distict</th>
+                                
+                                <th>State</th>
+                                <th>Action</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+
+                                {% for trans_byid in trans_byid %}
+                                <tr>
+                             
+                                    <td>{{ trans_byid.id }}</td>
+                                    <td><a class="btn btn-sm ">{{ trans_byid.sales_id.name }}</a></td>
+                                    <td>{{ trans_byid.name }}</td>
+                                    
+                                    <td>{{ trans_byid.phone }}</td>
+                                    <td>{{ trans_byid.add_street }}</td>
+                                    
+                                    <td>{{ trans_byid.add_district }}</td>
+                                    <td>{{ trans_byid.add_state }}</td>
+                                    
+                                    
+                                    <td>
+                                        <a class="btn btn-sm btn-warning" href="/trans_edit/{{ trans_byid.id }}"> <span class="fa fa-edit"></span> Edit</a>
+                                        <!-- <a class="btn btn-sm btn-danger" href="/trans_delete/{{ trans_byid.id }}"><span class="fa fa-trash"></span> Delete</a> -->
+                                        
+                                        <!-- {% if trans_byid.status == 3 %}
+                                        <a class="btn btn-sm btn-danger" href="/trans_pdf/{{ trans.id }}"><span class="fa fa-trash"></span> Pdf create</a>
+                                        {% endif %} -->
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+  
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Street</th>
+                        <th>Location</th>
+                        <th>District</th>
+                        <th>State</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for trans in trans %}
+                        <tr>
+                     
+                            <td>{{ trans.id }}</td>
+                            <td>{{ trans.name }}</td>
+                            <td>{{ trans.add_street }}</td>
+                            <td>{{ trans.add_district }}</td>
+                            <td>{{ trans.add_state }}</td>
+                            
+                            
+                            <td>
+                                <a class="btn btn-sm btn-warning" href="trans_edit/{{ trans.id }}"> <span class="fa fa-edit"></span> Edit</a>
+                                <a class="btn btn-sm btn-danger" href="trans_delete/{{ trans.id }}"><span class="fa fa-trash"></span> Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table> -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'assets/demo/chart-bar-demo.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
+{% endblock %}
+

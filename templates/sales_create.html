@@ -1,0 +1,106 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+{% block stylesheet %}
+    <style>
+        .bd-example {
+            padding: 1.5rem;
+            margin-right: 0;
+            margin-left: 0;
+            border-width: 1px;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+        }
+        .bd-example {
+            position: relative;
+            padding: 1rem;
+            margin: 1rem -.75rem 0;
+            border: solid #dee2e6;
+            border-width: 1px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+{% if request.user.is_superuser %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Sales</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Add Sales</li>
+        </ol>
+        <div class="bd-example">
+            <form action="sales_create" method="POST">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Enter your name"/>
+                            <label for="inputFirstName">Enter Name</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" id="street" type="text" name="street" placeholder="Enter your Street"/>
+                            <label for="inputstreet">Enter Street</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input type="text" class="form-control" name="location" placeholder="Location" id="inputlocation" required>
+                            <label for="inputlocation">Enter Location</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input type="text" class="form-control" name="district" placeholder="District" id="inputdistrict" required>
+                            <label for="inputdistrict">Enter District</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input type="text" class="form-control" name="state" placeholder="State" id="inputstate" required>
+                            <label for="inputstate">Enter State</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input type="text" class="form-control" name="pincode" placeholder="Pincode" id="inputpincode" required>
+                            <label for="inputpincode">Enter Pincode</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input type="text" class="form-control" name="phone" placeholder="Phone" id="inputphone" required>
+                            <label for="inputphone">Enter Phone</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input type="text" class="form-control" name="stock" placeholder="Stock" id="inputstock" required>
+                            <label for="inputstock">Enter Stock</label>
+                        </div>
+                    </div>
+                  
+                </div>
+                
+                <div class="mt-4 mb-0">
+                    <div class="d-grid"><button class="btn btn-primary btn-block" type="submit">Submit</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <p>This user don't have access</p>
+    {% endif %}
+    
+{% endblock %}
+{% block javascript %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+{% block stylesheet %}
+    <style>
+        .bd-example {
+            padding: 1.5rem;
+            margin-right: 0;
+            margin-left: 0;
+            border-width: 1px;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+        }
+        .bd-example {
+            position: relative;
+            padding: 1rem;
+            margin: 1rem -.75rem 0;
+            border: solid #dee2e6;
+            border-width: 1px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Appointment</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Add Appointment</li>
+        </ol>
+        <div class="bd-example">
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Book Appointment</button>
+            </form>
+
+
+            
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% endblock %}

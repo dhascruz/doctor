@@ -1,0 +1,130 @@
+
+
+{% load static %}
+
+<head>
+    <title>{% if pdf_title %}{{ pdf_title }}{% else %}PDF{% endif %}</title>
+    <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+        }
+        .header {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            color: #007cae;
+        }
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+           /* text-align: right;*/
+           padding: 10px 20px 0px 20px;  
+        }
+        .title span {
+            color: #007cae;
+        }
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: left !important;
+            /*margin-left: 40%;*/
+        }
+        .hrItem {
+            border: none;
+            height: 1px;
+            /* Set the hr color */
+            color: #333; /* old IE */
+            background-color: #fff; /* Modern Browsers */
+        }
+    </style>
+
+
+<head>
+    <link rel="stylesheet" href="/static/css/pdf_style.css">
+</head>
+<body>
+
+    <div style="text-align: right; margin-right: 100px;margin-top: 10px;">
+        
+        <table class="adressTable" style="margin-left: 5%;margin-right: 5%;">
+            <tr>
+            <img src="/static/css/logo.png" style="width: 200px;  ">
+            </tr>
+            
+        </table>
+    </div>
+    <div>
+        
+        <table class="adressTable"  style="margin-left: 5%;    width: 90%; margin-top: 26px;">
+            <tr>
+                
+                <td style="width: 50%;"> <b>From:</b><br/><br/><br/>Pasumai Indhiya, <br/>M71, Cactus Corporate Coworking,<br/> #173, 2nd Floor, Block B, Tecci Park,<br/> OMR, Sholinganallur, Chennai, <br/>Tamil Nadu - 600119.</td>
+            
+            
+            <td> <b>To:</b><br/><br/><br/>{{trans.name}}  <br/>{{trans.add_street}}  <br/>{{trans.add_location}} {{trans.add_pincode}}</td></tr>
+
+            </tr>
+            
+        </table>
+    </div>
+
+    <div class="section">
+        <table class="infoTable">
+            <tr>
+                <td style="width: 50%;"><b>Invoice Number:</b> {{invno}}</td>
+                <td><b>Customer Number :</b>{{cusno}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Invoice Date: {{invdate}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <table class="invoiceTable">
+            <thead>
+                <tr>
+                    <td  class="regular">S.no</td>
+                    <td  class="regular">Description</td>
+                    <td  class="regular">Subscription Duration</td>
+                    <td  class="regular">Amount</td>
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td  class="regular">1</td>
+                    <td  class="regular"><b>Pasumai Indhiya Monthly Magazine</b></td>
+                    <td  class="regular">1 Year</td>
+                    <td  class="regular"><b>Rs. 360</b></td>
+                    
+                </tr>
+                
+                <tr class="tfoot">
+                    <td class="padrow"></td>
+                </tr>
+                   
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="section">
+
+        <p>Subscription End date: <b>{{subend}}.</b></p>
+    </div>
+
+    <table  style="margin-left: 5%;    width: 90%; ">
+        <tr>
+            <td style="width: 50%;"></td>
+            <td  align="right"><img src="/static/css/round_seal_pi.png" style="width: 100px;  "></td>
+            
+        
+        </tr>
+        
+    </table>
+
+</body>
+
+

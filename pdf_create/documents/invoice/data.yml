@@ -1,0 +1,26 @@
+from:
+    name: Pasumai Indhiya
+    street: OMR
+    postcode: 600092
+    city: Chennai
+
+to:
+    name: Customer1
+    street: Test
+    postcode: 600022
+    city: Erode
+
+customer_number: 10004
+currency: Rs
+
+invoice:
+    number: R10006
+    date: 15.09.2016
+    pay_until_date: 22.09.2016
+
+positions:
+    - price: 215 
+      amount: 1
+      text: |
+        Pasumai indhiya Subscription
+    

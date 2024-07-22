@@ -1,0 +1,16 @@
+
+
+   <div class="container-fluid px-4">
+        <h1 class="mt-4">Appointment</h1>
+        <div class="bd-example">
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Book Appointment</button>
+            </form>
+
+
+            
+        </div>
+    </div>

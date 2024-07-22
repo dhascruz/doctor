@@ -1,0 +1,129 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+
+{% block body %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Sales</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Sales</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Sales List
+                {% if request.user.is_superuser %}
+
+                <a class="btn btn-sm btn-success" href="{% url 'sales_create' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+
+                
+                <a class="btn btn-sm btn-success" href="{% url 'sales_excel' %}" style="padding: 8px; float: right; background-color: green; color: white;">Download Excel</a>
+            </div>
+            {% endif %} 
+            
+
+
+
+            <div class="card-body">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                       Sales list
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Total Sales</th>
+                                <th>Street</th>
+                                <th>Location</th>
+                                <th>District</th>
+                                <th>State</th>
+                                <th>Action</th>
+                                
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Total Sales</th>
+                                <th>Street</th>
+                                <th>Location</th>
+                                <th>District</th>
+                                <th>State</th>
+                                <th>Action</th>
+                            </tfoot>
+                            <tbody>
+                                {% for sales in sales %}
+                        <tr>
+                            <td>{{ sales.id }}</td>
+                            <td><a class="btn btn-sm " href="trans_list_byid/{{ sales.id }}"> {{ sales.name }}</a></td>
+                            
+                            <td>{{ sal_cnt }}</td>
+                            <td>{{ sales.add_street }}</td>
+                            <td>{{ sales.add_district }}</td>
+                            <td>{{ sales.add_state }}</td>
+                            
+                            
+                            <td>
+                                <a class="btn btn-sm btn-warning" href="sales_edit/{{ sales.id }}"> <span class="fa fa-edit"></span> Edit</a>
+                                
+                            </td>
+                        </tr>
+                    {% endfor %}
+  
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Street</th>
+                        <th>Location</th>
+                        <th>District</th>
+                        <th>State</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for sales in sales %}
+                        <tr>
+                            <td>{{ sales.id }}</td>
+                            <td>{{ sales.name }}</td>
+                            <td>{{ sales.add_street }}</td>
+                            <td>{{ sales.add_district }}</td>
+                            <td>{{ sales.add_state }}</td>
+                            
+                            
+                            <td>
+                                <a class="btn btn-sm btn-warning" href="sales_edit/{{ sales.id }}"> <span class="fa fa-edit"></span> Edit</a>
+                                <a class="btn btn-sm btn-danger" href="pete/{{ sales.id }}"><span class="fa fa-trash"></span> Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table> -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/demo/chart-area-demo.js' %}"></script>
+    <script src="{% static 'assets/demo/chart-bar-demo.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
+{% endblock %}
