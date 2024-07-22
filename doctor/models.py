@@ -4,25 +4,6 @@ from django.db import models
 
 #from associates.models import models1
 
-
-
-
-    
-
-
-
-
-    
-
-
-
-
-    
-
-
-
-    
-
     
 class Doctor(models.Model):
     first_name = models.CharField(max_length=100)
@@ -41,7 +22,7 @@ class Appointment(models.Model):
     patient_email = models.CharField(max_length=20)
     patient_address = models.CharField(max_length=200)
     patient_fees = models.DecimalField(max_digits=5, decimal_places=0)
-    patient_fee_status = models.BooleanField()
+    patient_fee_status = models.BooleanField(default=False)
     appointment_date = models.DateTimeField()
 
 
