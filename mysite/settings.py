@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-_jp+i(q1%hu^84h%ft$(27t*2%m+)@w+b_q0wan69kb3m!=+y0
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8080', 'https://managepi.crtitp.com','http://127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080', 'https://doctor.cruzconsultancy.in/','http://127.0.0.1']
 
 
 # Application definition
