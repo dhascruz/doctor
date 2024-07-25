@@ -26,12 +26,31 @@ class Doctor(models.Model):
 #     appointment_date = models.DateTimeField()
 
 
+class Patient(models.Model):
+    name = models.CharField(max_length=255)
+    mobile_number = models.CharField(max_length=15)
+    email = models.EmailField()
+    address = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
 class Appointment(models.Model):
     MORNING = 'MORNING'
     AFTERNOON = 'AFTERNOON'
     SLOT_CHOICES = [
         (MORNING, 'Morning (10:00 AM to 01:00 PM)'),
         (AFTERNOON, 'Afternoon (02:00 PM to 06:00 PM)'),
+    ]
+
+    PENDING = 'Pending'
+    APPROVED = 'Approved'
+    CANCELLED = 'Cancelled'
+    STATUS_CHOICES = [
+        (PENDING, 'Pending'),
+        (APPROVED, 'Approved'),
+        (CANCELLED, 'Cancelled'),
     ]
 
     name = models.CharField(max_length=255)
@@ -42,9 +61,13 @@ class Appointment(models.Model):
     email = models.EmailField()
     address = models.TextField()
     appointment_fees = models.DecimalField(max_digits=6, decimal_places=2, default=150.00)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=PENDING)
 
 
 def __str__(self):
         return f"{self.name} - {self.appointment_date} ({self.slot})"
+
+
+
 
 

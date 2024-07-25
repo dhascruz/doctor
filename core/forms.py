@@ -8,6 +8,14 @@ class DoctorForm(forms.ModelForm):
 
 
 
+class PatientForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = ['name', 'mobile_number', 'email', 'address']
+        widgets = {
+            'address': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+        }
+
        
 
 

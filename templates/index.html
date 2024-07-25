@@ -11,7 +11,7 @@
             <div class="col-sm-4">
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Total Appointments</div>
-                    <div style="font-size: 70px;text-align: center;">{{ rev_cnt }}</div>
+                    <div style="font-size: 70px;text-align: center;">{{ app_cnt }}</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         
                         <a class="small text-white stretched-link" href="trans_list_bystatus/1">View Details</a>
@@ -22,7 +22,7 @@
             <div class="col-sm-4">
                 <div class="card bg-warning text-white mb-4">
                     <div class="card-body">Total Approved Appointments</div>
-                    <div style="font-size: 70px;text-align: center;">{{ sub_cnt }}</div>
+                    <div style="font-size: 70px;text-align: center;">{{ approved_cnt }}</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link" href="trans_list_bystatus/3">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -32,7 +32,7 @@
             <div class="col-sm-4">
                 <div class="card bg-success text-white mb-4">
                     <div class="card-body">Today's Appointment Patient List</div>
-                    <div style="font-size: 70px;text-align: center;">{{ sal_cnt }}</div>
+                    <div style="font-size: 70px;text-align: center;">{{ today_cnt }}</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link" href="trans_list_bystatus/2">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -112,7 +112,10 @@
                                     <td>
                                         <a class="btn btn-sm btn-warning" href="app_edit/{{ appointment.id }}/edit"> <span class="fa fa-edit"></span> Edit</a>
                                         <a class="btn btn-sm btn-danger" href="app_delete/{{ appointment.id }}"><span class="fa fa-trash"></span> Delete</a>
+                                           <!-- <a class="btn btn-sm btn-warning" href="app_edit/{{ appointment.id }}/edit"> <span class="fa fa-edit"></span> Approrove</a>
+                                              <a class="btn btn-sm btn-warning" href="app_edit/{{ appointment.id }}/edit"> <span class="fa fa-edit"></span> Cancel</a> -->
                                     </td>
+                                
                                 </tr>
 
                 {% endfor %}

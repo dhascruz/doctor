@@ -9,6 +9,7 @@ from . import views
 urlpatterns = [
     #path('cart-items/', CartItemViews.as_view()),
  path('appointments', views.appointments, name='appointments'),
+ path('appointment_successhome', views.appointment_successhome, name='appointment_success_home'),
 
 
      

@@ -1,7 +1,7 @@
 import locale
 import os
 from django.contrib.staticfiles.storage import staticfiles_storage
-
+from django.urls import reverse
 
 
 
@@ -52,6 +52,14 @@ def index(request):
     # sub_cnt=Transactions.objects.filter(status=3).all().count()
     # sto_cnt=Transactions.objects.filter(status=4).all().count()
 
+    today = date.today()
+    
+    app_cnt=Appointment.objects.all().count()
+    app_approved_cnt=Appointment.objects.filter(status='Approved').count()
+    #Appointment.objects.filter.all().count()
+    today_cnt=Appointment.objects.filter(appointment_date=today).count()
+       
+
     paginator = Paginator(appoinments, 2000)
     page = request.GET.get('page')
     try:
@@ -60,7 +68,7 @@ def index(request):
         appoinments = paginator.page(1)
     except EmptyPage:
         appoinments = paginator.page(paginator.num_pages)
-    return render(request, 'index.html', {'appointments': appoinments})
+    return render(request, 'index.html', {'appointments': appoinments, 'app_cnt':app_cnt, 'approved_cnt':app_approved_cnt, 'today_cnt':today_cnt})
     
 
 #### assocaite view start
@@ -236,3 +244,139 @@ def doc_delete(request, id):
     return redirect('/list')
 
 ####doctor view end
+
+####doctor view start
+
+@login_required
+def pat_list(request):
+    patients_list = Patient.objects.all()
+    
+    paginator = Paginator(patients_list, 5)
+    page = request.GET.get('page')
+    try:
+        patients = paginator.page(page)
+    except PageNotAnInteger:
+        patients = paginator.page(1)
+    except EmptyPage:
+        patients = paginator.page(paginator.num_pages)
+    return render(request, 'pat_list.html', {'patients': patients})
+
+
+def update_status(request, appointment_id, status):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    if status in [Appointment.APPROVED, Appointment.CANCELLED]:
+        appointment.status = status
+        appointment.save()
+    return redirect(reverse('app_list'))
+
+
+@login_required
+def pat_create(request):
+    if request.method == 'POST':
+    
+        form = PatientForm(request.POST)
+        if form.is_valid():
+                form.save()
+                return redirect('patient_success')
+
+                
+                #return redirect('/pat_list')
+    else:
+        
+            form = PatientForm()        
+            return render(request, 'pat_create.html' , {'form': form})
+
+@login_required
+def patient_success(request):
+    return render(request, 'pat_success.html')
+
+@login_required
+def pat_edit(request, pk):
+    # patients = patient.objects.get(id=id)
+    # context = {'patients': patients}
+    # return render(request, 'pat_edit.html', context)
+
+    item = get_object_or_404(Patient, pk=pk)
+    if request.method == 'POST':
+        form = PatientForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('pat_list')
+    else:
+        form = PatientForm(instance=item)
+    return render(request, 'pat_edit.html', {'form': form})
+
+
+@login_required
+def pat_update(request, id):
+    patient = patient.objects.get(id=id)
+    patient.name=request.POST['name']
+    patient.add_street=request.POST['street']
+    patient.add_location=request.POST['location']
+    patient.add_district=request.POST['district']
+    patient.add_state=request.POST['state']
+    patient.add_pincode=request.POST['pincode']
+    patient.phone=request.POST['phone']
+    # patient.name = request.POST['name']
+    # patient.lastname = request.POST['lastname']
+    # patient.mobile_number = request.POST['mobile_number']
+    # patient.description = request.POST['description']
+    # patient.location = request.POST['location']
+    # patient.date = request.POST['date']
+    patient.save()
+    messages.success(request, 'patient was updated successfully!')
+    return redirect('/pat_list')
+
+@login_required
+def pat_delete(request, id):
+    patient = patient.objects.get(id=id)
+    patient.delete()
+    messages.warning(request, 'patient was deleted successfully!')
+    return redirect('/list')
+
+####patient view end
+
+
+
+
+
+
+def new_patient(request):
+    if request.method == 'POST':
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('patient_success')
+    else:
+        form = PatientForm()
+    return render(request, 'appointments/new_patient.html', {'form': form})
+
+def new_appointment(request):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('appointment_success')
+    else:
+        form = AppointmentForm()
+    return render(request, 'appointments/new_appointment.html', {'form': form})
+
+def patient_success(request):
+    return render(request, 'appointments/patient_success.html')
+
+def appointment_success(request):
+    return render(request, 'appointments/appointment_success.html')
+
+def appointment_details(request):
+    appointments = Appointment.objects.all()
+    return render(request, 'appointments/appointment_details.html', {'appointments': appointments})
+
+def approved_patient_details(request):
+    patients = Patient.objects.all()
+    return render(request, 'appointments/approved_patient_details.html', {'patients': patients})
+
+def schedule(request):
+    return render(request, 'appointments/schedule.html')
+
+def reports(request):
+    return render(request, 'appointments/reports.html')

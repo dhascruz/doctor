@@ -10,7 +10,7 @@ urlpatterns = [
     path('app_edit/<int:pk>/edit/', views.app_edit, name='app_edit'),
     path('app_delete/<int:id>', views.app_delete, name='app_delete'),
     #path('success/', success, name='success'),
-    path('appointment_success/', views.appointment_success, name='appointment_success'),
+    
     path('doctor_success/', views.doctor_success, name='doctor_success'),
 
 
@@ -20,6 +20,26 @@ urlpatterns = [
     path('doc_edit/<int:pk>/edit/', views.doc_edit, name='doc_edit'),
     path('doc_edit/update/<int:id>', views.doc_update, name='doc_update'),
     path('doc_delete/<int:id>', views.doc_delete, name='doc_delete'),
+
+
+    path('pat_create', views.pat_create, name='pat_create'),
+    path('pat_list', views.pat_list, name='pat_list'),
+    path('pat_edit/<int:pk>/edit/', views.pat_edit, name='pat_edit'),
+    path('pat_edit/update/<int:id>', views.pat_update, name='pat_update'),
+    path('pat_delete/<int:id>', views.pat_delete, name='pat_delete'),
+
+
+    path('new_patient/', views.new_patient, name='new_patient'),
+    path('new_appointment/', views.new_appointment, name='new_appointment'),
+    path('patient_success/', views.patient_success, name='patient_success'),
+    path('appointment_success/', views.appointment_success, name='appointment_success'),
+    path('appointment_details/', views.appointment_details, name='appointment_details'),
+    path('approved_patient_details/', views.approved_patient_details, name='approved_patient_details'),
+    path('schedule/', views.schedule, name='schedule'),
+    path('reports/', views.reports, name='reports'),
+
+    path('update_status/<int:appointment_id>/<str:status>/', views.update_status, name='update_status'),
+
 
     # path('sales_create', views.sales_create, name='sales_create'),
     # path('sales_list', views.sales_list, name='sales_list'),

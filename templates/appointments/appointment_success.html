@@ -1,0 +1,31 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+
+{% block body %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Appointments</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Appointment</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Appointments List
+                <a class="btn btn-sm btn-success" href="{% url 'app_create' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+            </div>
+
+            
+
+
+
+            <div class="card-body">
+               <p>Appointment booked successfully</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}
