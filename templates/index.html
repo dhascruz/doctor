@@ -8,9 +8,9 @@
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
         <div class="row">
-            <div class="col-xl-3 col-md-6">
+            <div class="col-sm-4">
                 <div class="card bg-primary text-white mb-4">
-                    <div class="card-body">Review </div>
+                    <div class="card-body">Total Appointments</div>
                     <div style="font-size: 70px;text-align: center;">{{ rev_cnt }}</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         
@@ -19,9 +19,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6">
+            <div class="col-sm-4">
                 <div class="card bg-warning text-white mb-4">
-                    <div class="card-body">Subscription</div>
+                    <div class="card-body">Total Approved Appointments</div>
                     <div style="font-size: 70px;text-align: center;">{{ sub_cnt }}</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link" href="trans_list_bystatus/3">View Details</a>
@@ -29,9 +29,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6">
+            <div class="col-sm-4">
                 <div class="card bg-success text-white mb-4">
-                    <div class="card-body">Sales</div>
+                    <div class="card-body">Today's Appointment Patient List</div>
                     <div style="font-size: 70px;text-align: center;">{{ sal_cnt }}</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link" href="trans_list_bystatus/2">View Details</a>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6">
+            <!-- <div class="col-xl-3 col-md-6">
                 <div class="card bg-danger text-white mb-4">
                     <div class="card-body">Stock</div>
                     <div style="font-size: 70px;text-align: center;">{{ sto_cnt }}</div>
@@ -48,7 +48,7 @@
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <!-- <div class="row">
             <div class="col-xl-6">
@@ -86,45 +86,35 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
-                   Sales list
+                   Patient list
                 </div>
                 <div class="card-body">
                     <table id="datatablesSimple">
                         <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Street</th>
-                            <th>Location</th>
-                            <th>District</th>
-                            <th>State</th>
-                            <th>Action</th>
-                            
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Street</th>
-                            <th>Location</th>
-                            <th>District</th>
-                            <th>State</th>
-                            <th>Action</th>
-                        </tfoot>
-                        <tbody>
-                            {% for sales in sales %}
-                    <tr>
-                        <td>{{ sales.id }}</td>
-                        <td><a class="btn btn-sm " href="trans_list_byid/{{ sales.id }}"> {{ sales.name }}</a></td>
-                        <td>{{ sales.add_street }}</td>
-                        <td>{{ sales.add_district }}</td>
-                        <td>{{ sales.add_state }}</td>
-                        
-                        
-                        <td>
-                            <a class="btn btn-sm btn-warning" href="sales_edit/{{ sales.id }}"> <span class="fa fa-edit"></span> Edit</a>
-                            <!-- <a class="btn btn-sm btn-danger" href="sales_delete/{{ sales.id }}"><span class="fa fa-trash"></span> Delete</a> -->
-                        </td>
-                    </tr>
+                            <tr>
+                                <th>id</th>
+                                <th>Patient Name</th>
+                                <th>Patient phone</th>
+                                <th>Patient Email</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for appointment in appointments %}
+                                <tr>
+                                    <td>{{ appointment.id }}</td>
+                                    <td>{{ appointment.name }}</td>
+                                    <td>{{ appointment.mobile_number }}</td>
+                                    <td>{{ appointment.email }}</td>
+                                    
+                                    
+                                    
+                                    <td>
+                                        <a class="btn btn-sm btn-warning" href="app_edit/{{ appointment.id }}/edit"> <span class="fa fa-edit"></span> Edit</a>
+                                        <a class="btn btn-sm btn-danger" href="app_delete/{{ appointment.id }}"><span class="fa fa-trash"></span> Delete</a>
+                                    </td>
+                                </tr>
+
                 {% endfor %}
 
                         </tbody>

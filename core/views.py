@@ -46,21 +46,21 @@ from decimal import Decimal
 # Create your views here.
 @login_required
 def index(request):
-    app_list = Appointment.objects.all()
+    appoinments=Appointment.objects.all()
     # rev_cnt=Transactions.objects.filter(status=1).all().count()
     # sal_cnt=Transactions.objects.filter(status=2).all().count()
     # sub_cnt=Transactions.objects.filter(status=3).all().count()
     # sto_cnt=Transactions.objects.filter(status=4).all().count()
 
-    paginator = Paginator(app_list, 2000)
+    paginator = Paginator(appoinments, 2000)
     page = request.GET.get('page')
     try:
-        sales = paginator.page(page)
+        appoinments = paginator.page(page)
     except PageNotAnInteger:
-        sales = paginator.page(1)
+        appoinments = paginator.page(1)
     except EmptyPage:
-        sales = paginator.page(paginator.num_pages)
-    return render(request, 'index.html', {'sales': sales})
+        appoinments = paginator.page(paginator.num_pages)
+    return render(request, 'index.html', {'appointments': appoinments})
     
 
 #### assocaite view start
