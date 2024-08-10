@@ -1,0 +1,66 @@
+{% extends 'layout/app.html' %}
+
+{% load static %}
+
+{% block body %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Appointments</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Appointment</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Appointments List
+                <a class="btn btn-sm btn-success" href="{% url 'app_create' %}" style="padding: 8px; float: right; background-color: green; color: white;">ADD</a>
+            </div>
+
+            
+
+
+
+            <div class="card-body">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Patient Name</th>
+                        <th>Patient phone</th>
+                        <th>Patient Email</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for appointment in appointments %}
+                        <tr>
+                            <td>{{ appointment.id }}</td>
+                            <td>{{ appointment.name }}</td>
+                            <td>{{ appointment.mobile_number }}</td>
+                            <td>{{ appointment.email }}</td>
+                            
+                            
+                            
+                            <td>
+                                <a class="btn btn-sm btn-warning" href="app_edit/{{ appointment.id }}/edit"> <span class="fa fa-edit"></span> Edit</a>
+                                <a class="btn btn-sm btn-danger" href="app_delete/{{ appointment.id }}"><span class="fa fa-trash"></span> Delete</a>
+                            
+                                <a class="btn btn-sm btn-warning" href="{% url 'update_status' appointment.id 'Approved' %}">Approve</a> |
+                                        <a class="btn btn-sm btn-danger" href="{% url 'update_status' appointment.id 'Cancelled' %}">Cancel</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}

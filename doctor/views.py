@@ -23,10 +23,9 @@ def appointments(request):
         form = AppointmentForm(request.POST)
         if form.is_valid():
                 form.save()
+                #return redirect('appointment_successhome')
                 return redirect('appointment_successhome')
-
-                messages.success(request, 'appointment was created successfully!')
-                return redirect('/app_list')
+                
     else:
         
             form = AppointmentForm()        
