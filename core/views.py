@@ -21,6 +21,7 @@ from django.db.models import Count
 from doctor.models import *
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import *
+from .forms import BookingForm
 
 from datetime import datetime, date
 from django.contrib import messages
@@ -380,3 +381,28 @@ def schedule(request):
 
 def reports(request):
     return render(request, 'appointments/reports.html')
+
+
+
+def book_appointment(request, doctor_id):
+    doctor = MyDoctor.objects.get(pk=doctor_id)
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.doctor = doctor
+
+            # Check for existing bookings with the same doctor, date, and slot
+            if Booking.objects.filter(doctor=doctor, date=booking.date, slot=booking.slot, time=booking.time).exists():
+                form.add_error(None, 'This time slot is already booked.')
+            else:
+                booking.save()
+                return redirect('booking_success')
+    else:
+        form = BookingForm()
+
+    return render(request, 'book_appointment.html', {'form': form, 'doctor': doctor})
+
+
+def booking_success(request):
+    return render(request, 'booking_success.html')

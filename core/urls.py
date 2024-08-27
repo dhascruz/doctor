@@ -40,6 +40,8 @@ urlpatterns = [
 
     path('update_status/<int:appointment_id>/<str:status>/', views.update_status, name='update_status'),
 
+    path('doctors/<int:doctor_id>/book/', views.book_appointment, name='book_appointment'),
+
 
     # path('sales_create', views.sales_create, name='sales_create'),
     # path('sales_list', views.sales_list, name='sales_list'),

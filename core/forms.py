@@ -69,3 +69,13 @@ class AppointmentForm(forms.ModelForm):
     widgets = {
             'appointment_date': forms.DateInput(attrs={'type': 'date'}),
         }
+    
+
+class BookingForm(forms.ModelForm):
+        class Meta:
+            model = Booking
+            fields = ['date', 'slot', 'time']
+
+        date = forms.DateField(widget=forms.SelectDateWidget(), initial=timezone.now())
+        slot = forms.ChoiceField(choices=Booking.SLOT_CHOICES)
+        time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))

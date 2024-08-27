@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -69,5 +70,25 @@ def __str__(self):
 
 
 
+
+
+class MyDoctor(models.Model):
+    name = models.CharField(max_length=255)
+    # Other fields like specialty, qualifications, etc.
+
+class Booking(models.Model):
+    doctor = models.ForeignKey(MyDoctor, on_delete=models.CASCADE)
+    date = models.DateField()
+    MORNING = 'M'
+    EVENING = 'E'
+    SLOT_CHOICES = [
+        (MORNING, 'Morning'),
+        (EVENING, 'Evening'),
+    ]
+    slot = models.CharField(max_length=1, choices=SLOT_CHOICES)
+    time = models.TimeField()
+
+    def __str__(self):
+        return f"{self.doctor.name} - {self.date} - {self.get_slot_display()} at {self.time}"
 
 
